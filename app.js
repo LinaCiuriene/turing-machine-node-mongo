@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
     const rules     = file.map((rule) => rule.split(' '))
     
     const action = (state, position) => {
+        
         const rule = rules.find((rule) => rule[0] == state && rule[1] == tape[position] ) || []
         const [,, valueNew, move, stateNew] = rule
         
