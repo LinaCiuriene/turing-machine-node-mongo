@@ -9,26 +9,25 @@ app.get('/', (req, res) => {
                     .split('\n')
                     .filter((el) => el != '')
     
-    const position  = file.shift()
-    const tape      = Array.from(file.shift())
-    const rules     = file.map((rule) => rule.split(' '))
+    const headPosition  = file.shift()
+    const tape          = Array.from(file.shift())
+    const rules         = file.map((rule) => rule.split(' '))
     
     const action = (state, position) => {
-        
         const rule = rules.find((rule) => rule[0] == state && rule[1] == tape[position] ) || []
         const [,, valueNew, move, stateNew] = rule
         
         if(rule && rule.length > 0) {
             tape[position] = valueNew
             move == 'R' ? position ++ : position --
+        
+            // action(stateNew, position, false)
             
-            action(stateNew, position)
+            res.send(tape.join(''))
         }
-        else
-            res.send(tape.join(''));
     }
     
-    action('0', position)
+    action('0', headPosition)
 })
 
 app.listen(8080)
