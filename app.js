@@ -20,9 +20,9 @@ app.get('/', (req, res) => {
         if(rule && rule.length > 0) {
             tape[position] = valueNew
             move == 'R' ? position ++ : position --
-        
-            // action(stateNew, position, false)
-            
+            action(stateNew, position, false)
+        }
+        else {
             res.send(tape.join(''))
         }
     }
